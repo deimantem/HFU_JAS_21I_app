@@ -1,0 +1,11 @@
+{
+  "name": "hfu_jas_21i_app",
+  "version": "1.0.0",
+  "description": "test app",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "author": "Deimante M",
+  "license": "ISC"
+}
