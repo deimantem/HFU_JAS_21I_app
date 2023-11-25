@@ -1,6 +1,6 @@
 {
-  "addresses": [
-    { "name": "Maria" },
-    { "name": "Johann" }
+  "entities": [
+    { "id": 1, "name": "Entity 1", "date": "2023-01-01" },
+    { "id": 2, "name": "Entity 2", "date": "2023-02-01" }
   ]
 }
