@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import {getTodos, Todo} from "../Services/DataService";
+import {getTodos} from "../Services/DataService";
+import {Todo} from "../Interfaces/Todo";
 
 const TodoList: React.FC = () => {
     const [todos, setTodos] = useState<Todo[]>([]);
