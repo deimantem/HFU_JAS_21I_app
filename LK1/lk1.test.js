@@ -22,13 +22,13 @@ describe("LK1", () => {
     test("extract first and last letters", () => {
       const test = "foobar";
 
-      expect(getFirstAndLastLetters(test)).toBe({ first: "t", last: "t" });
+      expect(getFirstAndLastLetters(test)).toEqual({ first: "f", last: "r" });
     });
 
     test("extract first and last letters of empty string", () => {
       const test = "";
 
-      expect(getFirstAndLastLetters(test)).toBe({ first: undefined, last: undefined });
+      expect(getFirstAndLastLetters(test)).toEqual({ first: undefined, last: undefined });
     });
   });
 
@@ -48,7 +48,7 @@ describe("LK1", () => {
     test("extract first and last letters of empty string", () => {
       const test = "";
 
-      expect(getFirstAndLastLetters(test)).toBe({ first: undefined, last: undefined });
+      expect(getFirstAndLastLetters(test)).toEqual({ first: undefined, last: undefined });
     });
 
     test("capitalize all elements", () => {
@@ -96,7 +96,7 @@ describe("LK1", () => {
         password: "password123",
       };
 
-      const userAsJson = user;
+      const userAsJson = JSON.stringify(user);
 
       // Do not change this expectation; fix the output above
       expect(userAsJson).toBe(`{"name":"bob","password":"password123"}`);
@@ -108,7 +108,7 @@ describe("LK1", () => {
         password: "password123",
       };
 
-      const userAsJson = JSON.stringify(user);
+      const userAsJson = JSON.stringify(user, null, 2);
 
       // Do not change this expectation; fix the output above
       expect(userAsJson).toBe(
@@ -128,7 +128,9 @@ describe("LK1", () => {
         },
       };
 
-      const userAsJson = JSON.stringify(user);
+      const { password, ...userWithoutPassword } = user;
+
+      const userAsJson = JSON.stringify(userWithoutPassword, null, 2);
 
       // Do not change this expectation; fix the output above
       expect(userAsJson).toBe(
@@ -168,7 +170,7 @@ describe("LK1", () => {
 
   describe("Exceptions", () => {
     test("Divide returns NaN", () => {
-      expect(divide(10, 0)).toBe(NaN);
+      expect(() => divide(10, 0)).toThrowError(Error);
       expect(safeDivide(10, 5)).toBe(2);
     });
 
@@ -196,7 +198,7 @@ describe("LK1", () => {
         c: true,
       };
 
-      expect(getPropertyValues(obj)).toStrictEqual([1, "hello", true]);
+      expect([...getPropertyValues(obj)]).toStrictEqual([1, "hello", true]);
     });
 
     test("Get only one property", () => {
@@ -270,7 +272,7 @@ describe("LK1", () => {
       const birthDate = new Date(2000, 7, 1);
       const schoolName = "HFU";
 
-      const teacher = new Person(firstName, middleName, lastName, birthDate, schoolName);
+      const teacher = new Teacher(firstName, middleName, lastName, birthDate, schoolName);
 
       expect(teacher.firstName).toBe(firstName);
       expect(teacher.middleName).toBe(middleName);
@@ -286,7 +288,7 @@ describe("LK1", () => {
       const birthDate = new Date(2000, 7, 1);
       const schoolName = "HFU";
 
-      const teacher = new Teacher(firstName, middleName, lastName, birthDate);
+      const teacher = new Teacher(firstName, middleName, lastName, birthDate, schoolName);
 
       expect(teacher.firstName).toBe(firstName);
       expect(teacher.middleName).toBe(middleName);
