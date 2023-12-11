@@ -1,0 +1,24 @@
+.todo-detail-container {
+    max-width: 600px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    margin: 50px;
+}
+
+.todo-detail-title {
+    color: #333;
+}
+
+.todo-detail-item {
+    margin-bottom: 10px;
+}
+
+.back-link {
+    display: block;
+    margin-top: 20px;
+    color: #007bff;
+    text-decoration: none;
+}
