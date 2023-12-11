@@ -4,7 +4,7 @@
   "description": "Erste Prüfung JS 2023",
   "main": "lk1.library.js",
   "scripts": {
-    "test": "test"
+    "test": "jest"
   },
   "author": "Marco von Ballmoos",
   "license": "ISC",
