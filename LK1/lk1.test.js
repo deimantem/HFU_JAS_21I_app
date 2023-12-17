@@ -124,13 +124,13 @@ describe("LK1", () => {
         name: "bob",
         password: "password123",
         toJSON(key) {
-          return this;
+          const { password, ...userWithoutPassword } = user;
+
+          return userWithoutPassword;
         },
       };
 
-      const { password, ...userWithoutPassword } = user;
-
-      const userAsJson = JSON.stringify(userWithoutPassword, null, 2);
+      const userAsJson = JSON.stringify(user, null, 2);
 
       // Do not change this expectation; fix the output above
       expect(userAsJson).toBe(
@@ -170,6 +170,9 @@ describe("LK1", () => {
 
   describe("Exceptions", () => {
     test("Divide returns NaN", () => {
+
+      // Naja, du hast die Erwartung angepasst. Die Idee war, dass das Code angepasst werden soll.
+
       expect(() => divide(10, 0)).toThrowError(Error);
       expect(safeDivide(10, 5)).toBe(2);
     });
@@ -197,6 +200,8 @@ describe("LK1", () => {
         b: "hello",
         c: true,
       };
+
+      // Hier musstest du auch die Erwartung anpassen, weil du ein Generator statt ein Array zurückgegeben hast.
 
       expect([...getPropertyValues(obj)]).toStrictEqual([1, "hello", true]);
     });

@@ -12,6 +12,7 @@ export class Person {
 
     let age = today.getFullYear() - birthDate.getFullYear();
 
+    // Noch besser als meine Lösung. 😉 Die Tests prüfen die Logik unten nicht, ist aber korrekt.
     if (today.getMonth() < birthDate.getMonth() ||
         (today.getMonth() === birthDate.getMonth() && today.getDate() < birthDate.getDate())) {
       age--;
@@ -37,13 +38,16 @@ export class Teacher extends Person {
 }
 
 export function getFirstAndLastLetters(test) {
+  // at() gibt bereits undefined zurück. Der Fehler war, dass "first" das zweite statt das erste Element zurückgegeben hat.
+
   return {
-    first: test.length > 0 ? test.charAt(0) : undefined,
-    last: test.length > 0 ? test.charAt(test.length - 1) : undefined
+    first: test.at(0),
+    last: test.at(-1),
   };
 }
 
 export function getReverse(test) {
+  // Geht auch mit dem Spread Operator [...test].reverse().join('')
   return Array.from(test).reverse().join('');
 }
 
@@ -52,6 +56,9 @@ export function getCapitalized(test) {
 }
 
 export function getOddCapitalized(test) {
+  // Geht in Ordnung. Könnte man auch mit map() machen:
+  // return test.map((t, i) => (i % 2 === 1 ? t.toUpperCase() : t));
+
   const result = [];
 
   test.forEach((element, index) => {
@@ -75,6 +82,10 @@ export const getFibonacci = n => {
 
 export function* getFibonacciSequence() {
   let a = 0, b = 1;
+
+  // Sehr schön! Eine sehr kompakte und nicht rekursive Lösung.
+  // Man hätte auch getFibonacci() oben aufrufen können.
+
   while (true) {
     yield a;
     [a, b] = [b, a + b];
@@ -95,6 +106,9 @@ export function getPropertyNames(obj) {
 }
 
 export function* getPropertyValues(obj) {
+  // Geht auch mit dem Pendant zur obigen Funktion:
+  // return Object.values(obj);
+
   for (const objKey in obj) {
     yield obj[objKey];
   }
