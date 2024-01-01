@@ -67,3 +67,9 @@ a {
     justify-content: space-evenly;
     margin-top: 10px;
 }
+
+.search-container {
+    display: flex;
+    align-self: center;
+    width: 30vw;
+}
