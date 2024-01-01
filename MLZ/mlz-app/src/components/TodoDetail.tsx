@@ -28,9 +28,9 @@ const TodoDetail: React.FC = () => {
     const formattedDueDate = todo.dueDate
         ? new Date(todo.dueDate).toLocaleDateString('en-US', {
             year: 'numeric',
-            month: '2-digit', // adds leading zero if necessary
-            day: '2-digit',   // adds leading zero if necessary
-        }).replace(/\//g, '.') // replace slashes with dots
+            month: '2-digit',
+            day: '2-digit',
+        }).replace(/\//g, '.')
         : 'N/A';
 
     return (
