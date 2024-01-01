@@ -32,10 +32,6 @@
       "react-app/jest"
     ]
   },
-  "jest": {
-    "preset": "ts-jest",
-    "testEnvironment": "node"
-  },
   "browserslist": {
     "production": [
       ">0.2%",
