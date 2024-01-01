@@ -25,7 +25,13 @@ const TodoDetail: React.FC = () => {
         return <div>Loading...</div>;
     }
 
-    const formattedDueDate = new Date(todo.dueDate).toISOString().split('T')[0];
+    const formattedDueDate = todo.dueDate
+        ? new Date(todo.dueDate).toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: '2-digit', // adds leading zero if necessary
+            day: '2-digit',   // adds leading zero if necessary
+        }).replace(/\//g, '.') // replace slashes with dots
+        : 'N/A';
 
     return (
         <div className="todo-detail-container">

@@ -25,7 +25,9 @@ const EditTodoForm: React.FC = () => {
                 const todoData = await getTodoById(todoId);
                 if (todoData && todoId !== -1) {
                     // Convert the dueDate string obtained from the API into a Date object
-                    todoData.dueDate !== null && new Date(todoData.dueDate);
+                    if (todoData.dueDate !== null) {
+                        todoData.dueDate = new Date(todoData.dueDate);
+                    }
                     setEditTodo(todoData);
                 } else {
                     console.error(`Todo with ID ${todoId} not found.`);
@@ -99,7 +101,7 @@ const EditTodoForm: React.FC = () => {
                     <input
                         type="date"
                         name="dueDate"
-                        value={editTodo.dueDate.toISOString().split('T')[0]}
+                        value={editTodo.dueDate?.toISOString().split('T')[0]}
                         onChange={handleChange}
                     />
                 </label>

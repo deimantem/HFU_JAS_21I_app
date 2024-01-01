@@ -66,12 +66,12 @@ const AddTodoForm: React.FC = () => {
             </Link>
             <form onSubmit={handleSubmit} className="todo-form">
                 <label className="form-label">
-                    Title:
+                    Title*:
                     <input type="text" name="title" value={newTodo.title} onChange={handleChange} required/>
                 </label>
                 <label className="form-label">
                     Description:
-                    <textarea name="description" value={newTodo.description} onChange={handleChange}/>
+                    <textarea name="description" value={newTodo.description} onChange={handleChange} maxLength={150}/>
                 </label>
                 <label className="form-label">
                     Due Date:
