@@ -32,6 +32,16 @@ const TodoList: React.FC = () => {
         }
     };
 
+    // Highlight the matched search term in the title
+    const highlightSearchTerm = (title: string) => {
+        if (!searchTerm) {
+            return title;
+        }
+
+        const regex = new RegExp(searchTerm, 'gi');
+        return title.replace(regex, (match) => `<mark>${match}</mark>`);
+    };
+
     // Filter todos based on the title matching the search term
     const filteredTodos = todos.filter((todo) =>
         todo.title.toLowerCase().includes(searchTerm.toLowerCase())
@@ -56,7 +66,7 @@ const TodoList: React.FC = () => {
                     <div key={todo.id} className="card">
                         <Link to={`/todo/${todo.id}`}>View Details</Link>
                         <div className="card-header">
-                            <h3>{todo.title}</h3>
+                            <h3 dangerouslySetInnerHTML={{__html: highlightSearchTerm(todo.title)}}/>
                         </div>
                         <p>{todo.description}</p>
                         <div className="list-button-container">
