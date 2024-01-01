@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {Link} from 'react-router-dom';
-import {deleteTodo, getTodos} from '../services/DataService';
+import {createTodo, deleteTodo, getTodos} from '../services/DataService';
 import {Todo} from '../interfaces/Todo';
 import '../styles/TodoList.css';
 
@@ -32,6 +32,28 @@ const TodoList: React.FC = () => {
         }
     };
 
+    const handleCreateTestData = async () => {
+        // Create a new test todo
+        const newTodo: Todo = {
+            id: todos.length + 1,
+            title: `Test Todo ${todos.length + 1}`,
+            description: 'Test description',
+            dueDate: new Date(),
+            isCompleted: false,
+            lengthInDays: 3,
+        };
+
+        try {
+            await createTodo(newTodo);
+
+            // Fetch updated todos after adding
+            const updatedTodos = await getTodos();
+            setTodos(updatedTodos);
+        } catch (error) {
+            console.error('Error creating test todo:', error);
+        }
+    };
+
     // Highlight the matched search term in the title
     const highlightSearchTerm = (title: string) => {
         if (!searchTerm) {
@@ -58,9 +80,14 @@ const TodoList: React.FC = () => {
                     onChange={(e) => setSearchTerm(e.target.value)}
                 />
             </div>
-            <Link to="/create" className="create-todo-button">
-                Create New Todo
-            </Link>
+            <div className="button-container">
+                <Link to="/create" className="create-todo-button">
+                    Create New Todo
+                </Link>
+                <Link className="" onClick={handleCreateTestData} to={''}>
+                    Create Test Data
+                </Link>
+            </div>
             <div className="card-container">
                 {filteredTodos.map((todo) => (
                     <div key={todo.id} className="card">
@@ -73,10 +100,7 @@ const TodoList: React.FC = () => {
                             <Link to={`/edit/${todo.id}`} className="edit-todo-button">
                                 Edit
                             </Link>
-                            <button
-                                className="delete-todo-button"
-                                onClick={() => handleDelete(todo.id)}
-                            >
+                            <button className="delete-todo-button" onClick={() => handleDelete(todo.id)}>
                                 Delete
                             </button>
                         </div>
