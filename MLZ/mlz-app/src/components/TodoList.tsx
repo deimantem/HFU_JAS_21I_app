@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {Link} from 'react-router-dom';
-import {createTodo, deleteTodo, getTodos} from '../services/DataService';
+import {createTodo, deleteAllTodos, deleteTodo, getTodos} from '../services/DataService';
 import {Todo} from '../interfaces/Todo';
 import '../styles/TodoList.css';
 
@@ -69,6 +69,16 @@ const TodoList: React.FC = () => {
         todo.title.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
+    const handleDeleteAll = async () => {
+        try {
+            await deleteAllTodos();
+            const updatedTodos = await getTodos();
+            setTodos(updatedTodos);
+        } catch (error) {
+            console.error('Error deleting all todos:', error);
+        }
+    };
+
     return (
         <div className="todo-list-wrapper">
             <h2 className="todo-list-title">Todo-List</h2>
@@ -86,6 +96,9 @@ const TodoList: React.FC = () => {
                 </Link>
                 <Link className="" onClick={handleCreateTestData} to={''}>
                     Create Test Data
+                </Link>
+                <Link className="delete-all-todos-button" to={''} onClick={handleDeleteAll}>
+                    Delete All Todos
                 </Link>
             </div>
             <div className="card-container">

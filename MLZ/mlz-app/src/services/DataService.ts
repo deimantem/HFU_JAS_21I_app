@@ -66,3 +66,18 @@ export const createTodo = async (newTodo: Todo): Promise<Todo> => {
 
     return response.json();
 };
+
+export const deleteAllTodos = async (): Promise<void> => {
+    try {
+        const todos = await getTodos();
+
+        // Delete each todo individually because this does not work:
+        //  await fetch(apiUrl, {
+        //  method: 'DELETE',
+        //   });
+
+        await Promise.all(todos.map(todo => deleteTodo(todo.id)));
+    } catch (error) {
+        console.error('Error deleting all todos:', error);
+    }
+};

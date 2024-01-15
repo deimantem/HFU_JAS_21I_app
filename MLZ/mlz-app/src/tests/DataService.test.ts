@@ -1,4 +1,4 @@
-import {createTodo, deleteTodo, getTodoById, getTodos, updateTodo} from "../services/DataService";
+import {createTodo, deleteAllTodos, deleteTodo, getTodoById, getTodos, updateTodo} from "../services/DataService";
 import {Todo} from "../interfaces/Todo";
 import fetchMock from 'jest-fetch-mock';
 
@@ -74,5 +74,26 @@ describe('DataService', () => {
             },
             body: JSON.stringify(mockTodo),
         });
+    });
+    it('should delete all todos', async () => {
+        const mockTodos = [
+            {id: 1, title: 'Todo 1', description: 'Description 1', isCompleted: false},
+            {id: 2, title: 'Todo 2', description: 'Description 2', isCompleted: true},
+        ];
+
+        fetchMock.mockResponseOnce(JSON.stringify(mockTodos));
+
+        fetchMock.mockResponses(
+            JSON.stringify({}),
+            JSON.stringify({})
+        );
+
+        await deleteAllTodos();
+
+        expect(fetch).toHaveBeenCalledWith('http://localhost:3001/entities');
+
+        // Ensure deleteTodo is called for each todo
+        expect(fetch).toHaveBeenCalledWith('http://localhost:3001/entities/1', {method: 'DELETE'});
+        expect(fetch).toHaveBeenCalledWith('http://localhost:3001/entities/2', {method: 'DELETE'});
     });
 });
